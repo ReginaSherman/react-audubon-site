@@ -15,6 +15,10 @@ const BirdDetails = () => {
       .then((json) => setBird(json))
       .catch((err) => console.log('Error!', err))
     }, [newUrl])
+
+    if (!bird) {
+      return <p>Loading...</p>
+    }
     
     return (
         <div className="details-container">
@@ -24,15 +28,13 @@ const BirdDetails = () => {
           />
           <div className="details">
             <h2>{ bird.name }</h2>
-            <h3>( Empidonax virescens )</h3>
+            <h3>({ bird.genus })</h3>
             <h4>Conservation Status</h4>
             <p>
-              Would be vulnerable to loss of habitat, but no significant decline noted
-              so far. In some regions, Brown-headed Cowbirds often lay eggs in nests
-              of this species.
+              { bird.conservationStatus }
             </p>
             <a
-              href="https://www.audubon.org/field-guide/bird/acadian-flycatcher"
+              href={  bird.homepage }
               target="_blank"
               rel="noopener noreferrer"
             >
